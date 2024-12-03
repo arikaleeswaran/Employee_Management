@@ -26,6 +26,31 @@ app.post('/newemp',async (req,res)=>{
     try{
         const {emp_id,name,email,phone,dept,d_join,role} = req.body;
 
+        const qrCheck = "SELECT * FROM employee WHERE emp_id = ? OR email = ?;"
+
+        const data = [emp_id,email];
+
+        db.query(qrCheck,data,(err,result)=>{
+            if(err){
+                return res.status(500).json({"Error while Checking":err});
+            }
+            if(result.length >0){
+                const duplicate = [];
+                
+                result.forEach(element => {
+                    if(element.emp_id === emp_id){
+                        duplicate.push("Email ID ");
+                    }
+                    if(element.email == email){
+                        duplicate.push("Email")
+                    }
+                });
+                return res.status(409).json({
+                    error:`${duplicate.join("and ")} already exist!`
+                });
+            }
+        })
+
         const qr = "INSERT INTO employee (emp_id,name,email,phone,dept,d_join,role) VALUES(?,?,?,?,?,?,?);"
         const values = [emp_id,name,email,phone,dept,d_join,role];
     
@@ -80,5 +105,5 @@ app.delete('/:id',async (req,res)=>{
 })
 
 app.listen(5000,()=>{
-    console.log("Server connected! Let's rock");
+    console.log("Server connected! Let's rock.....");
 })
