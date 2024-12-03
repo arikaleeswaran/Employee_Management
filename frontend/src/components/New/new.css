@@ -1,4 +1,51 @@
-.newEmp{
-    align-items: center;
-    top: 0;
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+.inputfield{
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+.title{
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.inputitems{
+    width: 100%;
+}
+.inputitem form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+/* .inputcol{
+    flex: 1;
+    max-width: 300px;
+} */
+.input-item{
+    display: flex;
+    flex-direction: column;
+}
+.input-label{
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+.input-item input,
+.input-item select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.item{
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.375rem;
 }
