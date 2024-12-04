@@ -30,6 +30,9 @@ app.post('/newemp',async (req,res)=>{
 
         const data = [emp_id,email];
 
+        console.log(data);
+        
+
         db.query(qrCheck,data,(err,result)=>{
             if(err){
                 return res.status(500).json({"Error while Checking":err});
@@ -59,6 +62,8 @@ app.post('/newemp',async (req,res)=>{
                 console.error("DB insert error...",err);
                 return res.status(500).json({error: "Insert failed!"})
             }
+            console.log(res);
+            
             return res.status(201).json("Register Successfully!");
         })
     }catch(err){
