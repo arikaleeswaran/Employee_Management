@@ -22,14 +22,19 @@ const[errors,setErrors] = useState({})
     e.preventDefault();
     const validateError = Validate(data);
     setErrors(validateError)
-    const hasNoErrors = Object.keys(validationErrors).length === 0;
+    const hasNoErrors = Object.keys(validateError).length === 0;
     if(hasNoErrors){
       console.log(data);
       axios.post("http://localhost:8800/newemp",data).then(
         res => {
          navigate('/') 
         }
-      ).catch(err => console.log(err))
+      ).catch(err => {
+        if(err.response && err.response.status === 409){
+          setErrors(prev => ({...prev,duplicate: err.response.data.error}))
+        };
+        console.log(err)
+      })
     }
     
   }
@@ -72,7 +77,7 @@ const[errors,setErrors] = useState({})
               <div className='input-item'>
                 <label htmlFor="" className='input-label'>Employee ID: </label>
                 <input type="text" required onChange={handleChange} placeholder='Enter Employee ID' className='item' name='emp_id' value={data.emp_id}/>
-               
+                {errors.duplicate && <span className='error'>{errors.duplicate}</span>}
               </div>
               <div className='input-item'>
                 <label htmlFor="" className='input-label'>Name: </label>

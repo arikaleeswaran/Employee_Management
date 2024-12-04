@@ -42,7 +42,7 @@ app.post('/newemp',async (req,res)=>{
                 
                 result.forEach(element => {
                     if(element.emp_id === emp_id){
-                        duplicate.push("Email ID ");
+                        duplicate.push("Employee ID ");
                     }
                     if(element.email == email){
                         duplicate.push("Email")

@@ -63,20 +63,22 @@ function Home() {
             </thead>
             <tbody>
               {
-                employees.map((emp)=>(
+                employees.map((emp)=>{
+                  const formattedDate = new Date(emp.d_join).toISOString().split('T')[0];
+                  return(
                   <tr key={emp.emp_id}>
                     <td>{emp.emp_id}</td>
                     <td>{emp.name}</td>
                     <td>{emp.email}</td>
                     <td>{emp.phone}</td>
                     <td>{emp.dept}</td>
-                    <td>{emp.d_join}</td>
+                    <td>{formattedDate}</td>
                     <td>{emp.role}</td>
                     <td>
                       <button className='delt'onClick={(e)=>handleDelete(emp.emp_id,e)}>Delete</button>
                     </td>
                   </tr>
-                ))
+                )})
               }
             </tbody>
           </table>
