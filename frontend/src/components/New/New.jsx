@@ -22,7 +22,7 @@ const[errors,setErrors] = useState({})
     e.preventDefault();
     const validateError = Validate(data);
     setErrors(validateError)
-    const hasNoErrors = Object.values(validateError).every(error => error === "");
+    const hasNoErrors = Object.keys(validationErrors).length === 0;
     if(hasNoErrors){
       console.log(data);
       axios.post("http://localhost:8800/newemp",data).then(
@@ -48,8 +48,13 @@ const[errors,setErrors] = useState({})
   };
 
   const handleChange = (e)=>{
-    setData((prev)=>({...prev,[e.target.name]:e.target.value}));
+    const {name,value} = e.target;
+    const newData = {...data,[name]:value}
+    setData(newData);
     console.log(data);
+
+    const validationErrors = new Validate(newData);
+    setErrors(validationErrors);
     
   }
   return (
@@ -66,22 +71,22 @@ const[errors,setErrors] = useState({})
               <div className='inputcol'>
               <div className='input-item'>
                 <label htmlFor="" className='input-label'>Employee ID: </label>
-                <input type="text" required onChange={handleChange} placeholder='Enter Employee ID' className='item' name='emp_id' />
+                <input type="text" required onChange={handleChange} placeholder='Enter Employee ID' className='item' name='emp_id' value={data.emp_id}/>
                
               </div>
               <div className='input-item'>
                 <label htmlFor="" className='input-label'>Name: </label>
-                <input type="text" required onChange={handleChange} placeholder='Enter Name' className='item' name='name' />
+                <input type="text" required onChange={handleChange} placeholder='Enter Name' className='item' name='name' value={data.name}/>
                 {errors.name && <span className='error'>{errors.name}</span>}
               </div>
               <div className='input-item'>
                 <label htmlFor="" className='input-label'>Email: </label>
-                <input type="text" required onChange={handleChange} placeholder='Enter email' className='item' name='email' />
+                <input type="text" required onChange={handleChange} placeholder='Enter email' className='item' name='email' value={data.email} />
                 {errors.email && <span className='error'>{errors.email}</span>}
               </div>
               <div className='input-item'>
                 <label htmlFor="" className='input-label'>Phone: </label>
-                <input type="number" required onChange={handleChange} placeholder='Enter Phone No.' className='item' name='phone' />
+                <input type="number" required onChange={handleChange} placeholder='Enter Phone No.' className='item' name='phone' value={data.phone} />
                 {errors.phone && <span className='error'>{errors.phone}</span>}
               </div>
               <div className='input-item'>
@@ -98,12 +103,12 @@ const[errors,setErrors] = useState({})
               </div>
               <div className='input-item'>
                 <label htmlFor="" className='input-label'>Date of Joining: </label>
-                <input type="date" required onChange={handleChange} placeholder='Select Date' className='item' name='d_join'/>
+                <input type="date" required onChange={handleChange} placeholder='Select Date' className='item' name='d_join' value={data.d_join}/>
                 {errors.d_join && <span className='error'>{errors.d_join}</span>}
               </div>
               <div className='input-item'>
                 <label htmlFor="" className='input-label'>Role: </label>
-                <input type="text" required onChange={handleChange} placeholder='Enter role' className='item' name='role' />
+                <input type="text" required onChange={handleChange} placeholder='Enter role' className='item' name='role' value={data.role}/>
                 {errors.role && <span className='error'>{errors.role}</span>}
               </div>
               </div>
@@ -112,7 +117,6 @@ const[errors,setErrors] = useState({})
               <button type='reset' className='reset' onClick={handleReset}>Reset</button>
               <button type='submit' className='submit'>Submit</button>
             </div>
-           
             </form>
 
         </div>

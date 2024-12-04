@@ -9,6 +9,7 @@
     align-items: center;
     top: 0px;
   }
+
   .add{
     background-color: rgb(0, 115, 255);
     color: white;
@@ -16,4 +17,46 @@
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
+  }
+
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  thead{
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+  }
+
+  th, td{
+    padding: 12px 15px ;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+  }
+  .delt{
+    align-items: center;
+    margin-top: 5px;
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  tbody tr:hover{
+    background-color: #f1f3f5;
+    transition: background-color 0.3s ease;
+  }
+
+  tbody tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  tbody td {
+    color: #343a40;
   }
